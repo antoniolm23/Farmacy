@@ -21,10 +21,11 @@ public class FarmacyProject {
 			+ "\n'e' erase a drug, it is not needed anymore "
 			+ "\n't' a drug has been taken (this command is useful for those drugs occasionally taken)"
 			+ "and in those days in which you take just one drug forgetting the others"
-			+ "\n 's' to save the warehouse into a file named 'Farmacy.txt' that already exists"
-			+ "\n 'x' to check the list of expiring drugs"
-			+ "\n 'b' show the drugs that have to be taken today"
-			+ "\n 'q' to quit the programm"
+			+ "\n's' to save the warehouse into a file named 'Farmacy.txt' that already exists"
+			+ "\n'x' to check the list of expiring drugs"
+			+ "\n'b' show the drugs that have to be taken today"
+			+ "\n'q' to quit the programm"
+			+ "\n'r' to replenish a drug"
 			+ "\n'h' to display the help";		
 	
 	public static void main(String[] args) {
@@ -116,6 +117,15 @@ public class FarmacyProject {
 			case 'b':
 				w.showToday();
 				break;
+			case 'r':
+				System.out.println("Insert the drug to replenish");
+				String replenish = keyboard.next();
+				System.out.println("Insert the amount (0 is the default)");
+				int quantity = keyboard.nextInt();
+				System.out.println("Insert the number of boxes");
+				int boxes = keyboard.nextInt();
+				w.fillDrug(replenish, quantity, boxes);
+			break;
 			default:
 				System.out.println(help);
 				break;

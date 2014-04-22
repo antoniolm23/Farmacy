@@ -22,14 +22,19 @@ public class Warehouse {
 	}
 	
 	//fill the quantity of a drug
-	public boolean fillDrug(Drug d) {
+	public boolean fillDrug(String d, int quantity, int boxes) {
 		
-		int i = search(d.getName());
-		
-		if(i == -1) //ERROR 
+		int i = search(d);
+		int takenAmount;
+		if(i == -1) {//ERROR 
+			System.out.println("Error, drug not present");
 			return false;
-		else
-			drugStorage.get(i).fillDrug(d.getOriginalQuantity());
+		}
+		if(quantity == 0)
+			takenAmount = drugStorage.get(i).getOriginalQuantity();
+		else takenAmount = quantity;
+		takenAmount = takenAmount * boxes;
+		drugStorage.get(i).fillDrug(takenAmount);
 		
 		return true;
 		
@@ -37,7 +42,10 @@ public class Warehouse {
 	
 	//add a new Drug
 	public boolean addDrug(Drug d) {
-		if (search(d.getName()) != -1) return fillDrug(d);
+		if (search(d.getName()) != -1) {
+			System.out.println("Drug already present");
+			return false;
+		}
 		return drugStorage.add(d);
 	}
 	
