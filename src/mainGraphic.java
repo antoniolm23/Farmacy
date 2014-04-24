@@ -32,6 +32,12 @@ public class mainGraphic extends JFrame {
 		getContentPane().add(btnAdddrug);
 		
 		JButton btnTakedrug = new JButton("TakeDrug");
+		btnTakedrug.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				takeDrug td = new takeDrug(w);
+			}
+		});
 		btnTakedrug.setBackground(new Color(100, 149, 237));
 		btnTakedrug.setBounds(233, 88, 117, 25);
 		getContentPane().add(btnTakedrug);
@@ -48,6 +54,12 @@ public class mainGraphic extends JFrame {
 		getContentPane().add(btnErasedrug);
 		
 		JButton btnReplenishdrug = new JButton("ReplenishDrug");
+		btnReplenishdrug.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				replenishDrug rd = new replenishDrug(w);
+			}
+		});
 		btnReplenishdrug.setBackground(new Color(100, 149, 237));
 		btnReplenishdrug.setBounds(26, 88, 154, 25);
 		getContentPane().add(btnReplenishdrug);
