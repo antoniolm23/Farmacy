@@ -1,12 +1,17 @@
 import javax.swing.JFrame;
+
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 public class mainGraphic extends JFrame {
 	
@@ -65,11 +70,36 @@ public class mainGraphic extends JFrame {
 		getContentPane().add(btnReplenishdrug);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					w.writeToFile();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnSave.setBackground(new Color(100, 149, 237));
 		btnSave.setBounds(26, 231, 117, 25);
 		getContentPane().add(btnSave);
 		
 		JButton btnLoad = new JButton("Load");
+		btnLoad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					w.readFile();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnLoad.setBackground(new Color(100, 149, 237));
 		btnLoad.setBounds(233, 231, 117, 25);
 		getContentPane().add(btnLoad);
@@ -80,11 +110,25 @@ public class mainGraphic extends JFrame {
 		getContentPane().add(btnInventary);
 		
 		JButton btnDrugtotaketoday = new JButton("DrugToTakeToday");
+		btnDrugtotaketoday.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				w.showToday();
+			}
+		});
 		btnDrugtotaketoday.setBackground(new Color(100, 149, 237));
 		btnDrugtotaketoday.setBounds(27, 148, 190, 25);
 		getContentPane().add(btnDrugtotaketoday);
 		
 		JButton btnExpiringdrugs = new JButton("ExpiringDrugs");
+		btnExpiringdrugs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				List<String> ls = w.expiringDrugs();
+				for(int i = 0; i<ls.size(); i++)
+					System.out.println(ls.get(i));
+			}
+		});
 		btnExpiringdrugs.setBackground(new Color(100, 149, 237));
 		btnExpiringdrugs.setBounds(267, 148, 190, 25);
 		getContentPane().add(btnExpiringdrugs);
