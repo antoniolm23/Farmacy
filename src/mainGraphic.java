@@ -1,6 +1,8 @@
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.JButton;
 
@@ -11,14 +13,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.*;
-
+import java.util.*
+;
 public class mainGraphic extends JFrame {
 	
 	Warehouse w = new Warehouse();
 	
 	public mainGraphic() {
 		
+		ImageIcon icon = new ImageIcon("../img/Farmacia.png");
+		setIconImage(icon.getImage());
 		setTitle("Farmacy Project");
 		getContentPane().setBackground(new Color(0, 128, 0));
 		getContentPane().setLayout(null);
