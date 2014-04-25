@@ -80,7 +80,7 @@ public class addGraphic extends JFrame {
 		getContentPane().add(lblAlternate);
 		
 		txtPrescriptiontrueOr = new JTextField();
-		txtPrescriptiontrueOr.setText("Prescription (true or false)");
+		txtPrescriptiontrueOr.setText("No Prescription (true or false)");
 		txtPrescriptiontrueOr.setBounds(22, 95, 174, 19);
 		getContentPane().add(txtPrescriptiontrueOr);
 		txtPrescriptiontrueOr.setColumns(10);

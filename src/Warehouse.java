@@ -4,6 +4,7 @@ import java.util.*;
 public class Warehouse {
 	
 	List<Drug> drugStorage = new ArrayList<Drug>();
+	int lastDay; 
 	
 	//search a Drug basing on the String and returns its index into the list
 	protected int search(String name) {
@@ -172,6 +173,9 @@ public class Warehouse {
 		//writer to write on a file
 		PrintWriter writer = new PrintWriter("Farmacy.txt" , "UTF-8");
 		
+		Calendar expDay = Calendar.getInstance();
+		int day = expDay.DAY_OF_YEAR;
+		
 		int n = drugStorage.size();
 		for(int i=0; i<n; i++) {
 			Drug d = drugStorage.get(i);
@@ -180,7 +184,7 @@ public class Warehouse {
 			writer.println(d.getName() + " " + d.getOriginalQuantity() + 
 					" " + d.getActualQuantity() + " " + d.getTakenQuantity()+
 					" " + d.getUnit() + " "+ d.getFrequency() + " "+ d.getCash()+
-					" " + d.getTaken()+ " "+d.getDaylyFrequency() );
+					" " + d.getTaken()+ " "+d.getDaylyFrequency() + " " + day );
 			
 		}
 		
@@ -214,10 +218,14 @@ public class Warehouse {
 				boolean c = Boolean.parseBoolean(tokens[6]);
 				int tak = Integer.parseInt(tokens[7]);
 				int df = Integer.parseInt(tokens[8]);
+				int day = Integer.parseInt(tokens[9]);
 				//TODO: the id field has not been implemented yet
 				Drug d = new Drug(name, original, unit, c, 0, f, taken, df);
 				d.setActualQuantity(actual);
 				d.setTaken(tak);
+				
+				lastDay = day;
+				
 				//add the drug in the list
 				addDrug(d);
 			}
@@ -226,4 +234,6 @@ public class Warehouse {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getDay() {return lastDay;}
 }

@@ -13,14 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.*;
-import java.util.*
-;
+
 public class mainGraphic extends JFrame {
 	
 	Warehouse w = new Warehouse();
-	
 	public mainGraphic() {
 		
 		ImageIcon icon = new ImageIcon("../img/Farmacia.png");
@@ -110,11 +107,6 @@ public class mainGraphic extends JFrame {
 		btnLoad.setBounds(233, 231, 117, 25);
 		getContentPane().add(btnLoad);
 		
-		JButton btnInventary = new JButton("Inventary");
-		btnInventary.setBackground(new Color(100, 149, 237));
-		btnInventary.setBounds(311, 41, 117, 25);
-		getContentPane().add(btnInventary);
-		
 		JButton btnDrugtotaketoday = new JButton("DrugToTakeToday");
 		btnDrugtotaketoday.addMouseListener(new MouseAdapter() {
 			@Override
@@ -153,8 +145,13 @@ public class mainGraphic extends JFrame {
 		setVisible(true);
 	}
 	
+	public Warehouse getWarehouse() {return w;}
+	
 	public static void main(String args[]) {
 		mainGraphic g = new mainGraphic();
+		Process p = new Process();
+		p.start();
+		p.run(g.getWarehouse());
 	}
 	
 }
