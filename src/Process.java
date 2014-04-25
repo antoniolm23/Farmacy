@@ -7,7 +7,7 @@ public class Process extends Thread {
 		w = w1;
 		Calendar expDay = Calendar.getInstance();
 		int numbYest = w.getDay();
-		int numbToday = expDay.DAY_OF_YEAR;
+		int numbToday = expDay.get(6);
 		if(numbToday == (numbYest + 1) % 365) {
 			w.elapsingDay();
 			today = expDay;

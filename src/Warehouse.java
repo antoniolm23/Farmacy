@@ -172,9 +172,12 @@ public class Warehouse {
 		
 		//writer to write on a file
 		PrintWriter writer = new PrintWriter("Farmacy.txt" , "UTF-8");
-		
+		Date dateTime = new Date();
 		Calendar expDay = Calendar.getInstance();
-		int day = expDay.DAY_OF_YEAR;
+		expDay.setTime(dateTime);
+		int day = expDay.get(6);
+		
+		System.out.println(day);
 		
 		int n = drugStorage.size();
 		for(int i=0; i<n; i++) {
