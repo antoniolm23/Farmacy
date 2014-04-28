@@ -30,7 +30,7 @@ public class Warehouse {
 		int i = search(d);
 		int takenAmount;
 		if(i == -1) {//ERROR 
-			System.out.println("Error, drug not present");
+			alertMessage am = new alertMessage("Error, drug not present");
 			return false;
 		}
 		if(quantity == 0)
@@ -46,7 +46,7 @@ public class Warehouse {
 	//add a new Drug
 	public boolean addDrug(Drug d) {
 		if (search(d.getName()) != -1) {
-			System.out.println("Drug already present");
+			alertMessage am = new alertMessage("Drug already present");
 			return false;
 		}
 		return drugStorage.add(d);
@@ -85,24 +85,30 @@ public class Warehouse {
 		
 		int index = search(n);
 		int res = drugStorage.get(index).takeDrug();
-		if (res == 0) 
-			System.out.println("Drug " + n + " expiring need to buy");
-		if (res == -1)
-			System.out.println("Drug "+ n + " expiring NEED PRESCRIPTION!" );
-		if (res == -2)
-			System.out.println("Drug" + n + "not updated, you can't take that quantity");
+		if (res == 0) {
+			alertMessage am = new alertMessage("Drug " + n + " expiring need to buy");
+		}
+		if (res == -1) {
+			alertMessage am = new alertMessage("Drug "+ n + " expiring NEED PRESCRIPTION!" );
+		}
 		
+		if (res == -2) {
+			alertMessage am = new alertMessage("Drug" + n + "not updated, you can't take that quantity");
+		}
 	}
 	
 	//print the list
-	public void print() {
+	public List<String> print() {
 		int n = drugStorage.size();
+		
+		List<String> ls = new ArrayList<String>();
 		
 		Drug d;
 		for(int i=0; i<n; i++) {
 			d = drugStorage.get(i);
-			d.print();
+			ls.add(d.print());
 		}
+		return ls;
 	}
 	
 	//simulates a day that elapses
@@ -111,12 +117,15 @@ public class Warehouse {
 		int n=drugStorage.size();
 		for(int i=0; i<n; i++) {
 			int res = drugStorage.get(i).elapsingDay();
-			if (res == 0) 
-				System.out.println("Drug " + drugStorage.get(i).getName() + " expiring need to buy");
-			if (res == -1)
-				System.out.println("Drug "+ drugStorage.get(i).getName() + " expiring NEED PRESCRIPTION!" );
-			if (res == -2)
-				System.out.println("Drug" + drugStorage.get(i).getName() + "not updated, you can't take that quantity");
+			if (res == 0) {
+				alertMessage am = new alertMessage("Drug " + drugStorage.get(i).getName() + " expiring need to buy");
+			}
+			if (res == -1) {
+				alertMessage am = new alertMessage("Drug "+ drugStorage.get(i).getName() + " expiring NEED PRESCRIPTION!" );
+			}
+			if (res == -2) {
+				alertMessage am = new alertMessage("Drug" + drugStorage.get(i).getName() + "not updated, you can't take that quantity");
+			}
 		}
 		
 	}
@@ -124,8 +133,9 @@ public class Warehouse {
 	/*shows all the medicines that will be taken today
 	 * their daily frequency, the prescribed amount
 	 * and the remaining amount */
-	 public void showToday() {
+	 public List<String> showToday() {
 		 
+		 List<String> takeToday = new ArrayList<String>();
 		 int n = drugStorage.size();
 		 int tak;
 		 Drug d;
@@ -136,17 +146,22 @@ public class Warehouse {
 			 //check if the drug has to be taken
 			 tak = d.getTaken();
 			 tak++;
+			 String tmp;
 			 if(tak == d.getFrequency()) {
-				 System.out.println("Drug: "+ d.getName() + 
-						 "\n\t "+"daily frequency: "+ d.getDaylyFrequency()+ 
-						 " "+ "prescribed quantity: "+ d.getTakenQuantity()+
-						 "\n\t\t "+ "remaining: " + d.getActualQuantity());
+				 tmp = "Drug: "+ d.getName() + 
+						 "\t "+"Daily frequency: "+ d.getDaylyFrequency()+ 
+						 "\t"+ "prescribed quantity: "+ d.getTakenQuantity()+
+						 "\t"+ "remaining: " + d.getActualQuantity();
+				 takeToday.add(tmp);
 			 }
 			 
 		 }
 		 
+		 return takeToday;
+		 
 	 }
-	
+	 
+	 public int getDay() {return lastDay;}
 	 public int getMonth() {return lastMonth;}
 	 public int getYear() {return lastYear;}
 	 
@@ -249,6 +264,5 @@ public class Warehouse {
 			e.printStackTrace();
 		}
 	}
-	
-	public int getDay() {return lastDay;}
+
 }

@@ -117,11 +117,12 @@ public class mainGraphic extends JFrame {
 		btnLoad.setBounds(233, 231, 117, 25);
 		getContentPane().add(btnLoad);
 		
-		JButton btnDrugtotaketoday = new JButton("DrugToTakeToday");
+		JButton btnDrugtotaketoday = new JButton(" DrugToTakeToday");
 		btnDrugtotaketoday.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				w.showToday();
+				List<String> ls = w.showToday();
+				showWindow sw = new showWindow(ls, "Drugs to take today");
 			}
 		});
 		btnDrugtotaketoday.setBackground(new Color(100, 149, 237));
@@ -133,8 +134,7 @@ public class mainGraphic extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				List<String> ls = w.expiringDrugs();
-				for(int i = 0; i<ls.size(); i++)
-					System.out.println(ls.get(i));
+				showWindow sw = new showWindow(ls, " Expiring Drugs");
 			}
 		});
 		btnExpiringdrugs.setBackground(new Color(100, 149, 237));
@@ -145,7 +145,8 @@ public class mainGraphic extends JFrame {
 		btnPrint.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				w.print();
+				List<String> lp = w.print();
+				showWindow sw1 = new showWindow(lp, " Drugs inventary");
 			}
 		});
 		btnPrint.setBackground(new Color(100, 149, 237));

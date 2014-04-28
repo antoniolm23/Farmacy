@@ -89,7 +89,7 @@ class Drug{
     public int takeDrug() {
     	taken = 0;
     	if(actualQuantity <= 0 || actualQuantity < QuantityTaken) {
-    		System.out.println("ERROR WAREHOSE NOT UPDATED");
+    		alertMessage am= new alertMessage("ERROR WAREHOSE NOT UPDATED");
     		return -2;
     	}
     	
@@ -120,10 +120,11 @@ class Drug{
     }
     
     //print the drug
-    public void print() {
-    	System.out.println("Drug: " + nameDrug);
-    	System.out.println("\t original: "+ originalQuantity+measure+" freq: "+
-    			frequency+ " taken:"+QuantityTaken+ " remaining"+ actualQuantity);
+    public String print() {
+    	String ret = "Drug: " + nameDrug +
+    			"\t original: "+ originalQuantity+measure+" freq: "+
+    			frequency+ " taken:"+QuantityTaken+ " remaining"+ actualQuantity;
+    	return ret;
     }
     
     /*ADDED PART*/
