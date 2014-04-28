@@ -4,7 +4,9 @@ import java.util.*;
 public class Warehouse {
 	
 	List<Drug> drugStorage = new ArrayList<Drug>();
-	int lastDay; 
+	int lastDay;
+	int lastMonth;
+	int lastYear;
 	
 	//search a Drug basing on the String and returns its index into the list
 	protected int search(String name) {
@@ -145,6 +147,9 @@ public class Warehouse {
 		 
 	 }
 	
+	 public int getMonth() {return lastMonth;}
+	 public int getYear() {return lastYear;}
+	 
 	/*********************************************
 	 * FILE OPERATIONS
 	 * *******************************************
@@ -175,9 +180,11 @@ public class Warehouse {
 		Date dateTime = new Date();
 		Calendar expDay = Calendar.getInstance();
 		expDay.setTime(dateTime);
-		int day = expDay.get(6);
+		int day = expDay.get(5);
+		int month = expDay.get(8);
+		int year = expDay.get(1);
 		
-		System.out.println(day);
+		//System.out.println(day + " "+ month + " "+ year);
 		
 		int n = drugStorage.size();
 		for(int i=0; i<n; i++) {
@@ -187,7 +194,8 @@ public class Warehouse {
 			writer.println(d.getName() + " " + d.getOriginalQuantity() + 
 					" " + d.getActualQuantity() + " " + d.getTakenQuantity()+
 					" " + d.getUnit() + " "+ d.getFrequency() + " "+ d.getCash()+
-					" " + d.getTaken()+ " "+d.getDaylyFrequency() + " " + day );
+					" " + d.getTaken()+ " "+d.getDaylyFrequency() + " " + day + 
+					" " + month + " "+year);
 			
 		}
 		
@@ -222,12 +230,16 @@ public class Warehouse {
 				int tak = Integer.parseInt(tokens[7]);
 				int df = Integer.parseInt(tokens[8]);
 				int day = Integer.parseInt(tokens[9]);
+				int month = Integer.parseInt(tokens[10]);
+				int year = Integer.parseInt(tokens[11]);
 				//TODO: the id field has not been implemented yet
 				Drug d = new Drug(name, original, unit, c, 0, f, taken, df);
 				d.setActualQuantity(actual);
 				d.setTaken(tak);
 				
 				lastDay = day;
+				lastMonth = month;
+				lastYear = year;
 				
 				//add the drug in the list
 				addDrug(d);

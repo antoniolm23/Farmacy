@@ -14,10 +14,12 @@ import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import javax.swing.JTextField;
 
 public class mainGraphic extends JFrame {
 	
 	Warehouse w = new Warehouse();
+	private JTextField textField;
 	public mainGraphic() {
 		
 		ImageIcon icon = new ImageIcon("../img/Farmacia.png");
@@ -72,6 +74,13 @@ public class mainGraphic extends JFrame {
 		btnReplenishdrug.setBounds(26, 88, 154, 25);
 		getContentPane().add(btnReplenishdrug);
 		
+		textField = new JTextField();
+		textField.setBounds(333, 12, 114, 19);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		//set the actual date
+		textField.setEditable(false);
+		
 		JButton btnSave = new JButton("Save");
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
@@ -97,6 +106,7 @@ public class mainGraphic extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					w.readFile();
+					textField.setText(w.getDay() + "-"+ w.getMonth() + "-" + w.getYear());
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -142,6 +152,17 @@ public class mainGraphic extends JFrame {
 		btnPrint.setBounds(166, 183, 117, 25);
 		getContentPane().add(btnPrint);
 		
+		JButton btnDay = new JButton("Day");
+		btnDay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				w.elapsingDay();
+			}
+		});
+		btnDay.setBackground(new Color(100, 149, 237));
+		btnDay.setBounds(340, 41, 117, 25);
+		getContentPane().add(btnDay);
+		
 		setVisible(true);
 	}
 	
@@ -149,9 +170,8 @@ public class mainGraphic extends JFrame {
 	
 	public static void main(String args[]) {
 		mainGraphic g = new mainGraphic();
-		Process p = new Process();
-		p.start();
-		p.run(g.getWarehouse());
+		//Process p = new Process();
+		//p.start();
+		//p.run(g.getWarehouse());
 	}
-	
 }
