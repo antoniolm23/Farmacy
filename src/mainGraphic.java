@@ -168,8 +168,23 @@ public class mainGraphic extends JFrame {
 	
 	public Warehouse getWarehouse() {return w;}
 	
+	public void setDate() {
+		textField.setText(w.getDay() + "-"+ w.getMonth() + "-" + w.getYear());	
+	}
+	
+	public void load() throws FileNotFoundException {
+		w.readFile();
+		setDate();
+	}
+	
 	public static void main(String args[]) {
 		mainGraphic g = new mainGraphic();
+		try {
+			g.load();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//Process p = new Process();
 		//p.start();
 		//p.run(g.getWarehouse());
